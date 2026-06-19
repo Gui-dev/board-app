@@ -1,4 +1,5 @@
 import { ArchiveIcon, MessageCircleIcon, ThumbsUpIcon } from 'lucide-react'
+import type { Metadata } from 'next'
 import { Button } from '@/components/button'
 import { Card } from '@/components/card'
 import { Section } from '@/components/sections'
@@ -7,10 +8,12 @@ interface IBoardProps {
   searchParams: Promise<{ q?: string }>
 }
 
+export const metadata: Metadata = {
+  title: 'Board',
+}
+
 export default async function Board({ searchParams }: IBoardProps) {
   const { q } = await searchParams
-
-  console.log('Q: ', q)
 
   return (
     <main className="grid flex-1 grid-cols-4 items-stretch gap-5">
