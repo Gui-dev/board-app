@@ -53,6 +53,9 @@
       "security": {
         "noDangerouslySetInnerHtml": "off"
       },
+      "performance": {
+        "noImgElement": "off"
+      },
       "nursery": {
         "useSortedClasses": "error"
       }
