@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Header } from './header'
+import { Header } from '.'
 
 vi.mock('@/lib/auth-client', () => ({
   authClient: {
@@ -47,9 +47,7 @@ describe('<Header />', () => {
   it('renders search input', () => {
     render(<Header />)
 
-    expect(
-      screen.getByPlaceholderText('Search for features...')
-    ).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Search for features...')).toBeInTheDocument()
   })
 
   it('shows loading spinner when session is pending', () => {
@@ -100,10 +98,7 @@ describe('<Header />', () => {
 
     const avatar = screen.getByAltText('John Doe')
     expect(avatar).toBeInTheDocument()
-    expect(avatar).toHaveAttribute(
-      'src',
-      'https://avatars.githubusercontent.com/u/12345'
-    )
+    expect(avatar).toHaveAttribute('src', 'https://avatars.githubusercontent.com/u/12345')
   })
 
   it('calls signOut when avatar button is clicked', async () => {
@@ -143,9 +138,6 @@ describe('<Header />', () => {
 
     const avatar = screen.getByAltText('')
     expect(avatar).toBeInTheDocument()
-    expect(avatar).toHaveAttribute(
-      'src',
-      'https://example.com/avatar.png'
-    )
+    expect(avatar).toHaveAttribute('src', 'https://example.com/avatar.png')
   })
 })
