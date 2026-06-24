@@ -10,7 +10,11 @@ describe('<Card />', () => {
   })
 
   it('renders Card.Header children', () => {
-    render(<Card.Header><span>Header content</span></Card.Header>)
+    render(
+      <Card.Header>
+        <span>Header content</span>
+      </Card.Header>
+    )
     expect(screen.getByText('Header content')).toBeInTheDocument()
   })
 
@@ -25,7 +29,11 @@ describe('<Card />', () => {
   })
 
   it('renders Card.Footer children', () => {
-    render(<Card.Footer><span>Footer content</span></Card.Footer>)
+    render(
+      <Card.Footer>
+        <span>Footer content</span>
+      </Card.Footer>
+    )
     expect(screen.getByText('Footer content')).toBeInTheDocument()
   })
 })

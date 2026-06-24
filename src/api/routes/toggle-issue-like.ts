@@ -1,10 +1,10 @@
-import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi"
-import { and, eq, sql } from "drizzle-orm"
-import type { AuthSession } from "../auth"
-import { db } from "../db"
-import { issueLikes, issues } from "../db/schema"
-import { requireAuth } from "../middlewares/auth"
-import { LikeResponseSchema } from "./schemas/issue-likes"
+import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi'
+import { and, eq, sql } from 'drizzle-orm'
+import type { AuthSession } from '../auth'
+import { db } from '../db'
+import { issueLikes, issues } from '../db/schema'
+import { requireAuth } from '../middlewares/auth'
+import { LikeResponseSchema } from './schemas/issue-likes'
 
 const ErrorSchema = z.object({
   error: z.string(),
@@ -13,57 +13,57 @@ const ErrorSchema = z.object({
 
 const ParamsSchema = z.object({
   id: z.uuidv4().openapi({
-    param: { name: "id", in: "path" },
-    example: "550e8400-e29b-41d4-a716-446655440000",
+    param: { name: 'id', in: 'path' },
+    example: '550e8400-e29b-41d4-a716-446655440000',
   }),
 })
 
 const route = createRoute({
-  method: "post",
-  path: "/issues/{id}/like",
+  method: 'post',
+  path: '/issues/{id}/like',
   request: {
     params: ParamsSchema,
   },
   responses: {
     200: {
       content: {
-        "application/json": {
+        'application/json': {
           schema: LikeResponseSchema,
         },
       },
-      description: "Like toggled successfully",
+      description: 'Like toggled successfully',
     },
     401: {
       content: {
-        "application/json": {
+        'application/json': {
           schema: ErrorSchema,
         },
       },
-      description: "Unauthorized",
+      description: 'Unauthorized',
     },
     404: {
       content: {
-        "application/json": {
+        'application/json': {
           schema: ErrorSchema,
         },
       },
-      description: "Issue not found",
+      description: 'Issue not found',
     },
   },
 })
 
 const app = new OpenAPIHono<{
   Variables: {
-    user: AuthSession["user"] | null
-    session: AuthSession["session"] | null
+    user: AuthSession['user'] | null
+    session: AuthSession['session'] | null
   }
 }>()
 
 app.use(requireAuth)
 
-export const toggleIssueLike = app.openapi(route, async (c) => {
-  const { id } = c.req.valid("param")
-  const user = c.get("user")
+export const toggleIssueLike = app.openapi(route, async c => {
+  const { id } = c.req.valid('param')
+  const user = c.get('user')
 
   // Check if issue exists
   const [issue] = await db.select().from(issues).where(eq(issues.id, id))
@@ -71,10 +71,10 @@ export const toggleIssueLike = app.openapi(route, async (c) => {
   if (!issue) {
     return c.json(
       {
-        error: "Issue not found",
+        error: 'Issue not found',
         message: `Issue with id ${id} does not exist`,
       },
-      404,
+      404
     )
   }
 
@@ -122,6 +122,6 @@ export const toggleIssueLike = app.openapi(route, async (c) => {
       likes: updatedIssue.likes,
       liked,
     },
-    200,
+    200
   )
 })

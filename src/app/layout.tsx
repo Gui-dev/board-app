@@ -21,7 +21,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${interFont.className} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${interFont.className} scrollbar-thumb-navy-500 scrollbar-track-navy-900 h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col bg-navy-950 text-navy-50">
         <NuqsAdapter>{children}</NuqsAdapter>
       </body>

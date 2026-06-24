@@ -8,7 +8,11 @@ describe('<Section />', () => {
   })
 
   it('renders Section.Header children', () => {
-    render(<Section.Header><span>Header</span></Section.Header>)
+    render(
+      <Section.Header>
+        <span>Header</span>
+      </Section.Header>
+    )
     expect(screen.getByText('Header')).toBeInTheDocument()
   })
 
@@ -23,7 +27,11 @@ describe('<Section />', () => {
   })
 
   it('renders Section.Content children', () => {
-    render(<Section.Content><span>Card list</span></Section.Content>)
+    render(
+      <Section.Content>
+        <span>Card list</span>
+      </Section.Content>
+    )
     expect(screen.getByText('Card list')).toBeInTheDocument()
   })
 })
