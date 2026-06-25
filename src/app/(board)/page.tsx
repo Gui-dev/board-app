@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default async function Board({ searchParams }: IBoardProps) {
   const { q } = await searchParams
 
-  const issues = await listIssues()
+  const issues = await listIssues({ search: q })
 
   return (
     <main className="grid flex-1 grid-cols-4 items-stretch gap-5">
@@ -30,9 +30,14 @@ export default async function Board({ searchParams }: IBoardProps) {
         </Section.Header>
 
         <Section.Content>
+          {issues.backlog.length === 0 && (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-navy-300 text-sm">No issues in backlog</p>
+            </div>
+          )}
           {issues.backlog.map(issue => {
             return (
-              <Card.Root key={issue.id}>
+              <Card.Root href={`/issue/${issue.id}`} key={issue.id}>
                 <Card.Header>
                   <Card.Number>{issue.issueNumber}</Card.Number>
                   <Card.Title>{issue.title}</Card.Title>
@@ -64,9 +69,14 @@ export default async function Board({ searchParams }: IBoardProps) {
         </Section.Header>
 
         <Section.Content>
+          {issues.todo.length === 0 && (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-navy-300 text-sm">No issues to do</p>
+            </div>
+          )}
           {issues.todo.map(issue => {
             return (
-              <Card.Root key={issue.id}>
+              <Card.Root href={`/issue/${issue.id}`} key={issue.id}>
                 <Card.Header>
                   <Card.Number>{issue.issueNumber}</Card.Number>
                   <Card.Title>{issue.title}</Card.Title>
@@ -98,9 +108,14 @@ export default async function Board({ searchParams }: IBoardProps) {
         </Section.Header>
 
         <Section.Content>
+          {issues.in_progress.length === 0 && (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-navy-300 text-sm">No issues in progress</p>
+            </div>
+          )}
           {issues.in_progress.map(issue => {
             return (
-              <Card.Root key={issue.id}>
+              <Card.Root href={`/issue/${issue.id}`} key={issue.id}>
                 <Card.Header>
                   <Card.Number>{issue.issueNumber}</Card.Number>
                   <Card.Title>{issue.title}</Card.Title>
@@ -134,7 +149,7 @@ export default async function Board({ searchParams }: IBoardProps) {
         <Section.Content>
           {issues.done.map(issue => {
             return (
-              <Card.Root key={issue.id}>
+              <Card.Root href={`/issue/${issue.id}`} key={issue.id}>
                 <Card.Header>
                   <Card.Number>{issue.issueNumber}</Card.Number>
                   <Card.Title>{issue.title}</Card.Title>

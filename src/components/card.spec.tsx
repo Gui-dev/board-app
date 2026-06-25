@@ -3,7 +3,7 @@ import { Card } from './card'
 
 describe('<Card />', () => {
   it('renders Card.Root as a link with href', () => {
-    render(<Card.Root>Link</Card.Root>)
+    render(<Card.Root href="/">Link</Card.Root>)
     const link = screen.getByRole('link', { name: /link/i })
     expect(link).toBeInTheDocument()
     expect(link).toHaveAttribute('href', '/')
