@@ -1,5 +1,5 @@
+import { UserButton } from '@/components/user-button'
 import { SearchInput } from './search-input'
-import { UserButton } from './user-button'
 
 export const Header = () => {
   return (
